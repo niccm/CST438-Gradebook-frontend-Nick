@@ -7,33 +7,27 @@ import Button from '@mui/material/Button';
 import { TextField } from '@mui/material';
 
 
-function EditAssignment(props) { 
+function DeleteAssignment(props) {
   const [assignment, setAssignment] = useState(props.assignment)
   const [message, setMessage] = useState('');
-
   const [open, setOpen] = useState(false);
-
   const handleOpen = () => {
     setOpen(true);
 }
-
 const handleClose = () => {
-  props.onClose();  
+  props.onClose();
   setOpen(false);
 }
-
-  const saveAssignment = ( ) => {
-    setMessage(''); 
-    console.log("Assignment.save ");     
-    fetch(`${SERVER_URL}/assignment/${assignment.id}` , 
-        {  
-          method: 'PUT', 
-          headers: { 'Content-Type': 'application/json', }, 
-          body: JSON.stringify( assignment )
+  const deleteAssignment = ( ) => {
+    setMessage('');
+    console.log(assignment.id);
+    fetch(`${SERVER_URL}/assignment/${assignment.id}` ,
+        {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json', },
         } )
     .then(res => {
         if (res.ok) {
-          
           setMessage("Assignment saved.");
         } else {
           setMessage("Save error. "+res.status);
@@ -43,34 +37,23 @@ const handleClose = () => {
           setMessage("Exception. "+err);
           console.error('Save Assignment exception =' + err);
        });
-  };    
-
-  const editChange = (event) => {
-    setAssignment({...assignment,  [event.target.name]:event.target.value})
-}
-
-  //const headers = ['Name', 'Due Date', 'Course'];
-
+    handleClose();
+  };
   return (
     <div>
-      <button onClick={handleOpen}>Edit</button>
+      <button onClick={handleOpen}>Delete</button>
     <Dialog open={open} onClose={handleClose}>
       <DialogContent>
       <div>
-      <h3>Assignment Edit</h3>
-      </div>
-      <div margin="auto" >
-      <TextField autoFocus fullWidth label="Name" name= "assignmentName" value={assignment.assignmentName} onChange={editChange}/>
-      <TextField autoFocus fullWidth label="DueDate" name="dueDate" value={assignment.dueDate} onChange={editChange}/> 
+      <h3>Are You Sure You want to delete this assignment</h3>
       </div>
     </DialogContent>
     <DialogActions>
     <Button onClick={handleClose}>Close</Button>
-    <Button onClick={saveAssignment}>Save</Button>
+    <Button onClick={deleteAssignment}>Delete</Button>
     </DialogActions>
     </Dialog>
     </div>
-  ); 
+  );
 }
-
-export default EditAssignment;
+export default DeleteAssignment;
