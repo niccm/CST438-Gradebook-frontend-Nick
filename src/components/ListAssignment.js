@@ -1,6 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {SERVER_URL} from '../constants';
 import {Link} from 'react-router-dom';
+import EditAssignment from './EditAssignment';
+import AddAssignment from './AddAssignment';
+import DeleteAssignment from './DeleteAssignment';
 
 
 function ListAssignment(props) {
@@ -18,14 +21,14 @@ function ListAssignment(props) {
     fetch(`${SERVER_URL}/assignment`)
     .then((response) => response.json() ) 
     .then((data) => { 
-      console.log("assignment length "+data.length);
+      console.log("assignment length "+ data.length);
       setAssignments(data);
      }) 
     .catch(err => console.error(err)); 
   }
   
   
-    const headers = ['Assignment Name', 'Course Title', 'Due Date', ' ', ' ', ' '];
+    const headers = ['Assignment Name', 'Course Title', 'Due Date', 'Grade', 'Edit', 'Delete'];
     
     return (
       <div>
@@ -47,13 +50,18 @@ function ListAssignment(props) {
                       <td>
                         <Link to={`/gradeAssignment/${assignments[idx].id}`} >Grade</Link>
                       </td>
-                      <td>Edit</td>
-                      <td>Delete</td>
+                      <td>
+                      <EditAssignment assignment={assignments[idx]} onClose={fetchAssignments} />
+                      </td>
+                      <td>
+                      <DeleteAssignment assignment={assignments[idx]} onClose={fetchAssignments} /> 
+                      </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
-          </div>
+             <AddAssignment onClose={fetchAssignments} />
+          </div> 
       </div>
     )
 }  
