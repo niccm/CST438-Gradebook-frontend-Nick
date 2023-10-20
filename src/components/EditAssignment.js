@@ -60,13 +60,13 @@ const handleClose = () => {
       <h3>Assignment Edit</h3>
       </div>
       <div margin="auto" >
-      <TextField autoFocus fullWidth label="Name" name= "assignmentName" value={assignment.assignmentName} onChange={editChange}/>
-      <TextField autoFocus fullWidth label="DueDate" name="dueDate" value={assignment.dueDate} onChange={editChange}/> 
+      <TextField autoFocus fullWidth id="nameEdit" label="Name" name= "assignmentName" value={assignment.assignmentName} onChange={editChange}/>
+      <TextField autoFocus fullWidth id="dueDateEdit" label="DueDate" name="dueDate" value={assignment.dueDate} onChange={editChange}/> 
       </div>
     </DialogContent>
     <DialogActions>
-    <Button onClick={handleClose}>Close</Button>
-    <Button onClick={saveAssignment}>Save</Button>
+    <Button id="closeAssignmentButton" onClick={handleClose}>Close</Button>
+    <Button id="saveAssignmentButton" onClick={saveAssignment}>Save</Button>
     </DialogActions>
     </Dialog>
     </div>

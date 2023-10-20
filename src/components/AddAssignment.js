@@ -53,7 +53,7 @@ const handleClose = () => {
 // course id text field
   return (
       <div>
-      <button onClick={handleOpen}>Add</button>
+      <button id = "addButton" onClick={handleOpen}>Add</button>
     <Dialog open={open} onClose={handleClose}>
       <DialogContent>
       <div>
@@ -66,8 +66,8 @@ const handleClose = () => {
       </div>
     </DialogContent>
     <DialogActions>
-    <Button onClick={handleClose}>Close</Button>
-    <Button onClick={saveAssignment}>Add</Button>
+    <Button id="closeButton" onClick={handleClose}>Close</Button>
+    <Button id="saveButton" onClick={saveAssignment}>Add</Button>
     </DialogActions>
     </Dialog>
       </div>
