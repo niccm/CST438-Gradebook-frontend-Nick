@@ -49,8 +49,8 @@ const handleClose = () => {
       </div>
     </DialogContent>
     <DialogActions>
-    <Button onClick={handleClose}>Close</Button>
-    <Button onClick={deleteAssignment}>Delete</Button>
+    <Button id="closeButtonDelete" onClick={handleClose}>Close</Button>
+    <Button id ="deleteButton" onClick={deleteAssignment}>Delete</Button>
     </DialogActions>
     </Dialog>
     </div>
